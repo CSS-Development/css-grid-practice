@@ -1,23 +1,41 @@
 .container {
   margin: 20px;
   display: grid; /* by default will create one column and as many rows as elements we have as a child within the container*/
-  grid-template-columns: [hd-start] repeat(4, [col-start] 25% [col-end]) [hd-end];
-  height: 500px;
+  grid-template-columns: [hd-start] repeat(4, [col-start] 20% [col-end]) [hd-end];
+  height: 800px;
+  /* width: 800px; */
   grid-template-rows:
-    [hd-start] 5rem [hd-end row-2-start]minmax(10px, auto)
+    [hd-start] 5rem [hd-end row-2-start]minmax(10px, 20rem)
     [row-2-end row-3-start] 100px;
   /* column-gap: 20px;
   row-gap: 10px; */
   gap: 10px 20px; /* row-gap column-gap */
   grid-template-areas:
     "header header header header"
-    ". . main main"
+    ". side main main"
     "footer footer footer footer";
+  justify-items: stretch; /* position items in their areas (rows) */
+  align-items: stretch; /* align items based on their column (columns) */
+  /*justify-content: end;*/ /* all elements (row) */
+  /*align-content: center;*/ /* all elements (column) */
+}
+
+@media (max-width: 40rem) {
+  .container {
+    grid-template-rows:
+      [hd-start] 5rem [hd-end row-2-start]minmax(10px, 20rem)
+      [row-2-end row-3-start] 150px [row-3-end row-4-start] 100px [row-4-end];
+    grid-template-areas:
+      "header header header header"
+      "main main main main"
+      "side side side side"
+      "footer footer footer footer";
+  }
 }
 
 .el1 {
   background: rgba(255, 154, 72, 0.5);
-  grid-column: col-start 2 / col-end 2;
+  grid-area: side;
 }
 
 .el2 {
@@ -30,6 +48,8 @@
   /*grid-column: 1 / -1; */ /*start-value end-value*/
   /* grid-row: row-2-start / span 1; */
   grid-area: main;
+  /*justify-self: center;*/ /* x axis */
+  /*align-self: center;*/ /* y axis */
 }
 
 .el3 {
